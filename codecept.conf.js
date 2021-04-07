@@ -19,6 +19,7 @@ exports.config = {
     I: "./steps_file.js",
     main: "./pages/main.js",
     login: "./pages/login.js",
+    logout: "./pages/logout.js",
   },
   bootstrap: null,
   mocha: {},

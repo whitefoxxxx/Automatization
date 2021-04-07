@@ -1,6 +1,5 @@
 const I = actor();
 const expect = require("expect");
-let redir = "";
 
 module.exports = {
   elements: {
