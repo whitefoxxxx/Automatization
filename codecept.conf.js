@@ -20,6 +20,7 @@ exports.config = {
     main: "./pages/main.js",
     login: "./pages/login.js",
     logout: "./pages/logout.js",
+    wrpass: "./pages/wrpass.js",
   },
   bootstrap: null,
   mocha: {},
