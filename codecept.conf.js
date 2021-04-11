@@ -22,6 +22,7 @@ exports.config = {
     logout: "./pages/logout.js",
     wrpass: "./pages/wrpass.js",
     wrlogin: "./pages/wrlogin.js",
+    navigation: "./pages/navigation.js",
   },
   bootstrap: null,
   mocha: {},
