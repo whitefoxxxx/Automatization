@@ -23,6 +23,7 @@ exports.config = {
     wrpass: "./pages/wrpass.js",
     wrlogin: "./pages/wrlogin.js",
     navigation: "./pages/navigation.js",
+    switchlang: "./pages/switchlang.js",
   },
   bootstrap: null,
   mocha: {},
