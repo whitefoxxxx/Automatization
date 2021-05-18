@@ -1,3 +1,4 @@
+require("ts-node/register");
 const { setHeadlessWhen } = require("@codeceptjs/configure");
 
 // turn on headless mode when running with HEADLESS=true environment variable
@@ -5,7 +6,7 @@ const { setHeadlessWhen } = require("@codeceptjs/configure");
 setHeadlessWhen(process.env.HEADLESS);
 
 exports.config = {
-  tests: ["./tests UI/*_test.js", "./tests API/*_test.js"],
+  tests: "./tests API/API1_test.ts",
   output: "./output",
   helpers: {
     Puppeteer: {
