@@ -6,7 +6,7 @@ const { setHeadlessWhen } = require("@codeceptjs/configure");
 setHeadlessWhen(process.env.HEADLESS);
 
 exports.config = {
-  tests: "./tests API/API1_test.ts",
+  tests: "./tests API/*_test.ts",
   output: "./output",
   helpers: {
     Puppeteer: {

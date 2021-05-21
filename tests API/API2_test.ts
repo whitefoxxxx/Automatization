@@ -1,14 +1,21 @@
 import api from "../helpers/api";
-import api2 from "../helpers/api2";
+import data from "../helpers/data"
+import api2 from "../helpers/api2"
+const folderName: string = "kats2";
+const imageName: string = "img.jpg"
 
-Feature("Работа с файлом");
+Feature("Работа с файлом в папке");
 
-Scenario("Создать файл/удалить файл", async () => {
-  await api.createFolder("vi");
-  const create = await api.getFolder("vi");
-  await api.isCreate(create, "vi");
-
-  await api.deleteFolder("v");
-  const deleted = await api.getFolder("v");
-  await api.isDelete(deleted, "v");
+Scenario.only("Создать/удалить папку и файл ", async () => {
+  await api.createFolder(folderName);
+  const createdFolder = await api.getFolder({folderName: folderName, isImage: false});
+  await data.isExists({response: createdFolder, isExists: true, folderName: folderName});
+  const downloadFile = await api2.postFile(folderName, imageName);
+  await api2.asyncOperation(downloadFile);
+  await api2.deleteFile(folderName, imageName);
+  const deletedFile = await api.getFolder({folderName: folderName, isImage: true, imgName: imageName});
+  await data.isDeleted(deletedFile, folderName, imageName);
+  await api.deleteFolder(folderName);
+  const deletedFolder = await api.getFolder({folderName: folderName, isImage: false});
+  await data.isExists({response: deletedFolder, isExists: false});
 });
