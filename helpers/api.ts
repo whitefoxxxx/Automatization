@@ -20,35 +20,44 @@ class API {
   private URL: string = "https://cloud-api.yandex.net/v1/disk/";
 
   async createFolder(folderName: string): Promise<void> {
-      await fetch(`${this.URL}resources?path=${folderName}`, {
+    await fetch(`${this.URL}resources?path=${folderName}`, {
       headers: this.customHeaders,
       method: "PUT",
     });
   }
 
-  async deleteFolder(folderName: string): Promise<void> {
-    let resp = await fetch(`${this.URL}resources?path=${folderName}`, {
-      headers: this.customHeaders,
-      method: "DELETE",
-    });
+  async deleteFolder(folderName: string, permanently?: boolean): Promise<void> {
+      await fetch(`${this.URL}resources?path=${folderName}`, {
+        headers: this.customHeaders,
+        method: "DELETE",
+      });
+
   }
 
-  async getFolder(params: {folderName: string, isImage: boolean, imgName?: string}): Promise<any> {
-    if(params.isImage) {
-      const response = await fetch(`${this.URL}resources?path=${params.folderName}/${params.imgName}`, {
-        headers: this.customHeaders,
-        method: "GET",
-      });
-      return await response.json()
+  async getFolder(params: {
+    folderName: string;
+    isImage: boolean;
+    imgName?: string;
+  }): Promise<any> {
+    if (params.isImage) {
+      const response = await fetch(
+        `${this.URL}resources?path=${params.folderName}/${params.imgName}`,
+        {
+          headers: this.customHeaders,
+          method: "GET",
+        }
+      );
+      return await response.json();
+    } else {
+      const response = await fetch(
+        `${this.URL}resources?path=${params.folderName}`,
+        {
+          headers: this.customHeaders,
+          method: "GET",
+        }
+      );
+      return await response.json();
     }
-    else {
-      const response = await fetch(`${this.URL}resources?path=${params.folderName}`, {
-      headers: this.customHeaders,
-      method: "GET",
-    });
-    return await response.json();
-  }
-    
   }
 }
 
