@@ -6,8 +6,6 @@ class API3 {
     Accept: '*/*',
   };
   private URL: string = 'https://cloud-api.yandex.net/v1/disk/';
-  private img: string =
-  'https://mem-baza.ru/_ph/1/2/407807962.jpg?1600930888';
 
   async getFromTrash(): Promise<any> {
     const response = await fetch(`${this.URL}trash/resources?path=%2F`, {
@@ -24,7 +22,7 @@ class API3 {
     });
   }
 
-  async deleteFolder(folderName: string, permanently: boolean): Promise<any> {
+  async deleteFolder(folderName: string, permanently: boolean): Promise<string> {
       let response =  await fetch(`${this.URL}resources?path=${folderName}&permanently=${permanently}`, {
           headers: this.customHeaders,
           method: "DELETE",

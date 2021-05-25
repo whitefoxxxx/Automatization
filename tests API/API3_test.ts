@@ -7,10 +7,10 @@ const folderName: string = 'parrot';
 const imageName: string = 'popug.jpg';
 const img: string = 'https://mem-baza.ru/_ph/1/2/407807962.jpg?1600930888';
 
-Feature('Работа с файлом в карзине');
+Feature('Работа с файлом в корзине');
 
-Scenario.only(
-  'Создать файл/удалить файл/восстановить файл(фул удалить)',
+Scenario(
+  'Создать файл/удалить файл/восстановить файл',
   async () => {
     await api.createFolder(folderName);
     const createdFolder = await api.getFolder({
@@ -23,19 +23,19 @@ Scenario.only(
       folderName: folderName,
     });
     const downloadFile = await api2.postFile(folderName, imageName, img);
-    await api2.asyncOperation(downloadFile);
+    await api2.checkStatus(downloadFile);
     await api2.deleteFile(folderName, imageName);
     const deletedFile = await api.getFolder({
       folderName: folderName,
       isImage: true,
       imgName: imageName,
     });
-    await data.isDeleted(deletedFile, folderName, imageName);
+    await data.isDeleted(deletedFile);
     const fileInTrash = await api3.getFromTrash();
     const pathNameToRestore = await data.splitName(fileInTrash, imageName);
     await api3.restoreFile(pathNameToRestore);
     const assyncId = await api3.deleteFolder(folderName, true);
-    await api2.asyncOperation(assyncId);
+    await api2.checkStatus(assyncId);
     const deletedFolder = await api.getFolder({
       folderName: folderName,
       isImage: false,

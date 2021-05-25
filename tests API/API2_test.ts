@@ -20,14 +20,14 @@ Scenario('Создать/удалить папку и файл ', async () => {
     folderName: folderName,
   });
   const downloadFile = await api2.postFile(folderName, imageName, img);
-  await api2.asyncOperation(downloadFile);
+  await api2.checkStatus(downloadFile);
   await api2.deleteFile(folderName, imageName);
   const deletedFile = await api.getFolder({
     folderName: folderName,
     isImage: true,
     imgName: imageName,
   });
-  await data.isDeleted(deletedFile, folderName, imageName);
+  await data.isDeleted(deletedFile);
   await api.deleteFolder(folderName);
   const deletedFolder = await api.getFolder({
     folderName: folderName,

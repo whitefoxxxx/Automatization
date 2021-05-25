@@ -11,7 +11,7 @@ class API2 {
     folderName: string,
     imageName: string,
     img: string
-  ): Promise<any> {
+  ): Promise<string> {
     const response = await fetch(
       `${this.URL}resources/upload?path=${folderName}/${imageName}&url=${img}`,
       {
@@ -22,16 +22,18 @@ class API2 {
     return (await response.json()).href.slice(48);
   }
 
-  async asyncOperation(id: string): Promise<void> {
-    let response = await fetch(`${this.URL}operations/${id}`, {
+  private async getResponse(id: string): Promise<string> {
+    const response = await fetch(`${this.URL}operations/${id}`, {
       headers: this.customHeaders,
       method: 'GET',
     });
-    while ((await response.json()).status !== 'success') {
-      response = await fetch(`${this.URL}operations/${id}`, {
-        headers: this.customHeaders,
-        method: 'GET',
-      });
+    return (await response.json()).status 
+  }
+
+  async checkStatus(id: string): Promise<void> {
+   let status = await this.getResponse(id)
+    while(status !== 'success') {
+      status = await this.getResponse(id)
     }
   }
 
