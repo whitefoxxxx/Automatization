@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-class API4 {
+class API5 {
   private customHeaders: any = {
     Authorization: 'OAuth AQAAAAAcXMInAAcf7RtGGcq-m0wJn_H1SFrpFDY',
     Accept: '*/*',
@@ -9,4 +9,4 @@ class API4 {
   
 }
 
-export default new API4();
+export default new API5();

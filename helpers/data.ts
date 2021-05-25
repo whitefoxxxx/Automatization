@@ -5,13 +5,13 @@ class Check {
     response: any;
     isExists: boolean;
     folderName?: string;
+    folderName2?: string;
   }): Promise<void> {
-    if (params.isExists)
-      expect(params.response.path).toEqual(`disk:/${params.folderName}`);
-    else
-      expect(params.response.message).toEqual(
-        'Не удалось найти запрошенный ресурс.'
-      );
+    if (params.isExists) {
+      if(params.folderName2) expect(params.response.path).toEqual(`disk:/${params.folderName}/${params.folderName2}`);
+      else expect(params.response.path).toEqual(`disk:/${params.folderName}`);
+    }
+    else expect(params.response.message).toEqual('Не удалось найти запрошенный ресурс.');
   }
 
   async isDeleted(response: any): Promise<void> {
